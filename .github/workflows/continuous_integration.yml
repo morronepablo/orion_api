@@ -10,22 +10,23 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Install Node
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
 
       - name: Install dependencies
-        uses: npm install
+        run: npm install
 
       - name: Build project
         run: npm run build
 
-      - name: Checkout typescript errors
-        run: npm i -g typescript && tsc
+      - name: Checkout TypeScript errors
+        run: npx tsc --noEmit
 
       - name: Checkout lint errors
         run: npm run eslint
 
-      - name: Launch Unit and Integration test
+      - name: Launch Unit and Integration tests
         run: npm run test
